@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>filterMethod</title>
+<script type="text/javascript" src="/testq/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	//window.onload = function(){};
+	//jQuery(document).ready(function(){});
+	//$(document).ready(function(){});
+	$(function(){
+		//$("선택자").메소드(값);
+		//필터선택자로 선택한 경우 : $("선택자:필터선택자").메소드(값);
+		//$("h3:even").css("background-color", "blue").css("color", "white");
+		//filter(":필터선택자") 메소드 사용한 경우
+		$("h3").filter(":even").css("background-color", "navy").css("color", "white");
+		//filter(function(index){
+		//선택된 항목을 순번대로 계산해서 결과에 해당되는 항목만 선택함. })
+		$("h3").filter(function(index){
+			return index % 3 == 0;  //3의 배수인 인덱스만 선택
+		}).css({
+			"color": "red",
+			"font-size": "20pt",
+			"font-weight": "bold"
+		});
+
+		//$("선택자:eq(index)") => $("선택자").eq(index)
+		$("h3").eq(2).text("eq() 메소드로 글자바꿈");
+
+		//each() : 자동 루프처리하는 메소드
+		//is("선택자") : 해당 선택자를 가지고 있는지 물어보는 메소드
+		$("h3").each(function(){
+			if($(this).is(".box")){
+				$(this).css("border", "1px solid green");
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<h1>필터 선택자와 filter() 메소드 사용 연습</h1>
+<h3>Header-0</h3>
+<h3>Header-1</h3>
+<h3>Header-2</h3>
+<h3 class="box">Header-3</h3>
+<h3>Header-4</h3>
+<h3 class="box">Header-5</h3>
+</body>
+</html>
