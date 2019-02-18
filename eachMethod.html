@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>eachMethod</title>
+<style type="text/css">
+	.highlight_0 {background: red;}
+	.highlight_1 {background: orange;}
+	.highlight_2 {background: yellow;}
+	.highlight_3 {background: green;}
+	.highlight_4 {background: blue;}
+	.highlight_5 {background: purple;}
+</style>
+<script type="text/javascript" src="/testq/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var array = [
+			{name: "네이버", link: "http://www.naver.com"},
+			{name: "다음", link: "http://www.daum.net"},
+			{name: "구글", link: "http://www.google.com"},
+			{name: "네이트", link: "http://www.nate.com"}
+			];
+
+		$.each(array, function(index, item){
+			var append = "";
+			append += "<a href='" + item.link + "'>" + item.name + "</a><br>"
+			document.body.innerHTML += append;
+		});
+
+		//2.
+		$("h3").each(function(index, item){
+			$(item).addClass("highlight_" + index);
+		});
+
+		document.body.innerHTML += $(".highlight_0").css("background-color");
+		$("body").html($("body").html() + "<br>" + $(".highlight_1").css("background-color") + "<br>");
+        //$("body").text($("body").text() + "<br>" + $(".highlight_1").css("background-color") + "<br>");
+
+		//html() 메소드와 text() 메소드의 다른 점
+		$("div#area1").html("<h1>html 메소드로 적용</h1>");
+		$("div#area2").html("<h1>text 메소드로 적용</h1>");
+
+
+	});
+</script>
+</head>
+<body>
+<h1>jQuery 배열 처리 : each() 메소드 사용</h1>
+<h2>1. $.each() 사용</h2>
+<h2>2. $("선택자").each() 사용</h2>
+<h3>headline_0</h3>
+<h3>headline_1</h3>
+<h3>headline_2</h3>
+<h3>headline_3</h3>
+<h3>headline_4</h3>
+<h3>headline_5</h3>
+<button onclick="removeTest();">class 속성 제거</button>
+<script type="text/javascript">
+	function removeTest(){
+		$("h3").each(function(index,item)){
+			$(item).removeClass("highlight_" + index);
+		}
+	}
+</script>
+<br>
+<div id="area1"></div>
+<div id="area2"></div>
+<hr>
+<img src="/testq/resources/images/photo1.jpg"><br>
+<button onclick="changeSize();">100X50</button>
+&nbsp;	&nbsp;
+<button onclick="removeSize();">원래 크기로</button> <br>
+<script type="text/javascript">
+	function changeSize(){
+		$("img").attr("width", 100).attr("height", 50);
+	}
+
+	function removeSize(){
+		$("img").removeAttr("width").removeAttr("height");
+	}
+</script>
+<hr>
+<div id="area3" style="border:1px solid blue; width:100%; height:200px;">
+	<h2>area3 안의 후손 객체</h2>
+	<ul>
+		<li>항목1</li>
+		<li>항목2</li>
+		<li>항목3</li>
+		<li>항목4</li>
+	</ul>
+</div>
+<button onclick="removeOne();">한 개만 지우기</button>
+<button onclick="emptyTest();">모두 지우기</button>
+<script type="text/javascript">
+	function removeOne(){
+		$("h3").first().remove();
+	}
+
+	function emptyTest(){
+		$("div#area3").empty();
+	}
+</script>
+</body>
+</html>
