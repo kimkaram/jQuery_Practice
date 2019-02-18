@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>effect</title>
+<style type="text/css">
+	div.box {
+		width: 50px;
+		height: 50px;
+		position: relative;
+		background: skyblue;
+		margin: 10px;
+	}
+</style>
+<script type="text/javascript" src="/testq/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("input[type=button]").eq(0).click(function(){
+			$("img").first().show();
+		});
+		$("input[type=button]").eq(1).click(function(){
+			$("img").first().hide();
+		});
+		$("input[type=button]").eq(2).click(function(){
+			$("img").first().toggle(1000);
+		});
+
+		$("#slide").mouseover(function(){
+			$("img").eq(1).slideDown("slow");
+		}).mouseout(function(){
+			$("img").eq(1).slideUp("fast");
+		});
+
+		$("img").eq(2).mouseover(function(){
+			$(this).fadeOut('normal'); //this는 선택된 img태그를 뜻함
+		}).mouseout(function(){
+			$(this).fadeIn('normal');
+		});
+
+		//animate test
+		$("div.box").hover(function(){
+			$(this).animate({left: 500}, 'slow'); //this는 box를 가리킴 //블럭{}으로 묶어버리면 object(객체)임
+			//left: 500은 왼쪽에서 500 떨어트리라는 거
+		}, function(){
+			$(this).animate({left: 0}, 'slow');
+			//left: 0은 본인위치로 가는 거
+		}); //hover는 안에 두 개 넣어야 함. 위의 두개 mouseover, mouseout한 콜백함수를 한 번에 적용하는 거
+
+		//img 클릭하면 두배로 커짐
+		//다시 클릭하면 원래 크기로 돌아옴
+		var clickFlag = true; //true는 원래 크기 상태
+		$("img").last().click(function(){
+			if(clickFlag == true){
+				//img가 원래 크기 상태라면
+				var w = $(this).css("width");
+				var h = $(this).css("height");
+
+				$(this).animate({
+					width: parseInt(w) * 2,
+					height: parseInt(h) * 2
+				}, 'slow');
+
+				clickFlag = false; //커졌으니 꼭 false로 바꿔야 함
+			}else{
+				//img가 두배로 커져있는 상태
+				var w = $(this).css("width");
+				var h = $(this).css("height");
+
+				$(this).animate({
+					width: parseInt(w) / 2,
+					height: parseInt(h) / 2
+				}, 'slow');
+
+				clickFlag = true;
+			}
+		})
+
+	});	//document ready
+</script>
+</head>
+<body>
+<h1>effect 연습</h1>
+<h2>보이기(show), 안보이기(hide), 보였다 안 보였다(toggle)</h2>
+<img src="/testq/resources/images/photo2.jpg" width="150" height="150" border="0"><br>
+<input type="button" value="show"> &nbsp;
+<input type="button" value="hide"> &nbsp;
+<input type="button" value="toggle"> <br>
+<hr>
+<!-- slideUp, slideDown, slideToggle test -->
+<div id="slide" style="margin-buttom:0px;border:3px solid black;background:pink;border-radius:20px 20px 0px 0px;width:330px;height:70px;padding:30px;">
+여기에 마우스 오버하면 그림이 펼쳐집니다. <br>
+마우스 아웃하면 그림이 접어집니다.
+</div>
+<img src="/testq/resources/images/ph2.jpg" width="400" height="300" border="0"
+	 style="margin:0px;padding:0px;"> <br>
+<hr>
+<!-- fadeIn, fadeOut -->
+<img src="/testq/resources/images/ph6.jpg" width="400" height="300"><br>
+<hr>
+<!-- animate() test -->
+<div class="box"></div> <!-- class는 여러 개에 적용 가능 -->
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<hr>
+<img src="/testq/resources/images/ph5.jpg" width="150" height="100" border="0">
+
+</body>
+</html>
